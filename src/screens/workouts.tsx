@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import ImageList from '../components/image-list/image-list';
 import { getWorkouts } from '../services/workouts/workouts-service';
@@ -7,19 +7,19 @@ import { getWorkouts } from '../services/workouts/workouts-service';
 export default () => {
   const [workoutsData, setWorkoutsData] = useState([]);
 
-  useEffect(() => {
-    async function fetchWorkouts() {
-      try {
-        const payload = await getWorkouts();
-        // console.log('payload', payload);
-        setWorkoutsData(payload);
-      } catch (error) {
-        console.log('Error fetching Workouts data', error);
-      }
+  const handleFetchWorkouts = useCallback(async () => {
+    try {
+      const payload = await getWorkouts();
+      setWorkoutsData(payload);
+      console.log('payload', payload);
+    } catch (error) {
+      console.log('Error fetching Workouts data', error);
     }
+  }, []);
 
-    fetchWorkouts();
-  });
+  useEffect(() => {
+    handleFetchWorkouts();
+  }, [handleFetchWorkouts]);
 
   return (
     <View style={styles.container}>
