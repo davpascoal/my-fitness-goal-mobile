@@ -1,14 +1,33 @@
-import React from 'react';
-import { Text, StyleSheet, View, ImageBackground } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, StyleSheet, View } from 'react-native';
 import ImageList from '../components/image-list/image-list';
-import WorkoutsMock from '../../__mocks__/workouts-mock';
+import { getWorkouts } from '../services/workouts/workouts-service';
+// import WorkoutsMock from '../../__mocks__/workouts-mock';
 
-export default () => (
-  <View style={styles.container}>
-    <Text>Workout</Text>
-    <ImageList data={WorkoutsMock} />
-  </View>
-);
+export default () => {
+  const [workoutsData, setWorkoutsData] = useState([]);
+
+  useEffect(() => {
+    async function fetchWorkouts() {
+      try {
+        const payload = await getWorkouts();
+        // console.log('payload', payload);
+        setWorkoutsData(payload);
+      } catch (error) {
+        console.log('Error fetching Workouts data', error);
+      }
+    }
+
+    fetchWorkouts();
+  });
+
+  return (
+    <View style={styles.container}>
+      <Text>Workout</Text>
+      <ImageList data={workoutsData} />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

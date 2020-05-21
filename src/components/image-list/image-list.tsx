@@ -6,14 +6,10 @@ import {
   FlatList,
   View,
 } from 'react-native';
-
-interface IImage {
-  uri: string;
-  id: string;
-}
+import { IWorkout } from 'src/services/workouts/workouts-interface';
 
 interface IImageProps {
-  data: Array<IImage>;
+  data: Array<IWorkout>;
 }
 
 const ImageList = (props: IImageProps) => {
@@ -32,11 +28,11 @@ const ImageList = (props: IImageProps) => {
               : styles.view
           }>
           <ImageBackground
-            source={item}
+            source={{ uri: item.bgImg }}
             style={styles.backgroundImage}
             imageStyle={styles.imageStyle}
-            key={item.id}>
-            <Text style={styles.infoText}>Teste2</Text>
+            key={item.workoutId}>
+            <Text style={styles.infoText}>{item.title}</Text>
           </ImageBackground>
         </View>
       )}
