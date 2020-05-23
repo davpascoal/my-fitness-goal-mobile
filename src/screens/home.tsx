@@ -1,17 +1,24 @@
 import React from 'react';
-import {View, Text, ImageBackground, StyleSheet, Image} from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, Image } from 'react-native';
+import { useSelector } from 'react-redux';
 
-export default (props: any) => (
-  <View style={styles.container}>
-    {/* <ImageBackground
+export default (props: any) => {
+  const workouts = useSelector((state) => state.workouts);
+  console.log('workouts', workouts.data);
+
+  return (
+    <View style={styles.container}>
+      {/* <ImageBackground
       source={image}
       style={styles.image}
     >
       <Text style={styles.text}>Burn Fat in 20 Minutes</Text>
     </ImageBackground> */}
-    <Text>Home!</Text>
-  </View>
-);
+      <Text>Home!</Text>
+      {/* <Text>{workouts}</Text> */}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

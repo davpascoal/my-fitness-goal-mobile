@@ -1,33 +1,22 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import ImageList from '../components/image-list/image-list';
-import { getWorkouts } from '../services/workouts/workouts-service';
-// import WorkoutsMock from '../../__mocks__/workouts-mock';
+import { getWorkoutsAction } from '../store/workouts/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
-export default () => {
-  const [workoutsData, setWorkoutsData] = useState([]);
-
-  const handleFetchWorkouts = useCallback(async () => {
-    try {
-      const payload = await getWorkouts();
-      setWorkoutsData(payload);
-      console.log('payload', payload);
-    } catch (error) {
-      console.log('Error fetching Workouts data', error);
-    }
-  }, []);
-
-  useEffect(() => {
-    handleFetchWorkouts();
-  }, [handleFetchWorkouts]);
+const Workouts = () => {
+  const dispatch = useDispatch();
+  dispatch(getWorkoutsAction());
 
   return (
     <View style={styles.container}>
       <Text>Workout</Text>
-      <ImageList data={workoutsData} />
+      <ImageList data={useSelector((state) => state.workouts.data)} />
     </View>
   );
 };
+
+export default Workouts;
 
 const styles = StyleSheet.create({
   container: {
