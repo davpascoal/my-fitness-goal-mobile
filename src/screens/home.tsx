@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 
 export default (props: any) => {
   const workouts = useSelector((state) => state.workouts);
-  console.log('workouts', workouts.data);
 
   return (
     <View style={styles.container}>

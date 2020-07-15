@@ -2,7 +2,6 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import {MaterialCommunityIcons as MCIcon} from '@expo/vector-icons';
 import Icon from 'react-native-ionicons';
-import { View, Text } from 'react-native';
 
 interface FooterProps {
   router: Array<any>;

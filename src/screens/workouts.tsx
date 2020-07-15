@@ -4,14 +4,17 @@ import ImageList from '../components/image-list/image-list';
 import { getWorkoutsAction } from '../store/workouts/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
-const Workouts = () => {
+const Workouts = ({ navigation }) => {
   const dispatch = useDispatch();
   dispatch(getWorkoutsAction());
 
   return (
     <View style={styles.container}>
       <Text>Workout</Text>
-      <ImageList data={useSelector((state) => state.workouts.data)} />
+      <ImageList
+        data={useSelector((state) => state.workouts.data)}
+        // onPress={() => navigation.navigate('WorkoutModal')}
+      />
     </View>
   );
 };

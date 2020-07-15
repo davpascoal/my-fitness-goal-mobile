@@ -10,10 +10,12 @@ import { IWorkout } from 'src/services/workouts/workouts-interface';
 
 interface IImageProps {
   data: Array<IWorkout>;
+  onPress?: () => void;
 }
 
 const ImageList = (props: IImageProps) => {
   const { data } = props;
+  console.log('workouts', data);
 
   return (
     <FlatList
@@ -21,6 +23,7 @@ const ImageList = (props: IImageProps) => {
       style={{ backgroundColor: 'teal', flex: 1 }}
       contentContainerStyle={styles.listContainer}
       renderItem={({ item, index }) => (
+        // <Pressable onPress={onPress}>
         <View
           style={
             index === data.length - 1
@@ -35,6 +38,7 @@ const ImageList = (props: IImageProps) => {
             <Text style={styles.infoText}>{item.title}</Text>
           </ImageBackground>
         </View>
+        // </Pressable>
       )}
     />
   );
